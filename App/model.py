@@ -46,3 +46,49 @@ los mismos.
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+
+def newCatalog():
+    """
+    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    todos los libros, adicionalmente, crea una lista vacia para los autores,
+    una lista vacia para los generos y una lista vacia para la asociación
+    generos y libros. Retorna el catalogo inicializado.
+    """
+    catalog = {'show_id': None,
+               'type': None,
+               'title': None,
+               'director': None,
+               'cast': None,
+               'country': None,
+               'date_added': None,
+               'release_year': None,
+               'rating': None,
+               'duration': None,
+               'listed_in': None,
+               'description': None}
+
+    catalog['show_id'] = lt.newList('ARRAY_LIST')
+
+    catalog['type'] = lt.newList('SINGLE_LINKED')
+                               
+    catalog['title'] = lt.newList('SINGLE_LINKED')
+                                
+    catalog['director'] = lt.newList('ARRAY_LIST')
+
+    catalog['cast'] = lt.newList('ARRAY_LIST')
+
+    catalog['country'] = lt.newList('ARRAY_LIST')
+
+    catalog['date_added'] = lt.newList('ARRAY_LIST')
+
+    catalog['release_year'] = lt.newList('ARRAY_LIST')
+
+    catalog['rating'] = lt.newList('ARRAY_LIST')
+
+    catalog['duration'] = lt.newList('ARRAY_LIST')
+
+    catalog['listed_in'] = lt.newList('ARRAY_LIST')
+
+    catalog['description'] = lt.newList('ARRAY_LIST')
+
+    return catalog
