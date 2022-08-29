@@ -81,6 +81,7 @@ while True:
         print('Titulos de Hulu cargados: ' + str(hulu))
         print('Titulos de Netflix cargados: ' + str(netflix))
 
+
     elif int(inputs[0]) == 2:
         pass
 
