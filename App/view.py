@@ -52,6 +52,7 @@ def printMenu():
     print("7- : Encontrar contenido con un director involucrado")
     print("8- Listar el TOP de los géneros con más contenido")
     print("9- : Listar el TOP de los actores con más participaciones en contenido")
+    print("0- : Salir")
 
 catalog = None
 
@@ -59,9 +60,10 @@ def loadData(control):
     """
     Solicita al controlador que cargue los datos en el modelo
     """
-    show_id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in, description = controller.loadData(control)
-    return show_id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in, description
+    amazon, disney, hulu, netflix = controller.loadData(control)
 
+    return amazon, disney, hulu, netflix
+    
 control = newController()
 
 """
@@ -73,11 +75,17 @@ while True:
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
         print("Cargando información de los archivos ....")
-        show_id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in, description = loadData(control)
-        print('Películas cargadas: ' + str(title))
+        amazon, disney, hulu, netflix = loadData(control)
+        print('Titulos de Amazon cargados: ' + str(amazon))
+        print('Titulos de Disney cargados: ' + str(disney))
+        print('Titulos de Hulu cargados: ' + str(hulu))
+        print('Titulos de Netflix cargados: ' + str(netflix))
 
     elif int(inputs[0]) == 2:
         pass
+
+    elif int(inputs[0]) == 0:
+        sys.exit(0)
 
     else:
         continue

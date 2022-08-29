@@ -25,6 +25,7 @@
  """
 
 
+from gettext import Catalog
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
@@ -37,16 +38,6 @@ los mismos.
 
 # Construccion de modelos
 
-# Funciones para agregar informacion al catalogo
-
-# Funciones para creacion de datos
-
-# Funciones de consulta
-
-# Funciones utilizadas para comparar elementos dentro de una lista
-
-# Funciones de ordenamiento
-
 def newCatalog():
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar
@@ -54,41 +45,87 @@ def newCatalog():
     una lista vacia para los generos y una lista vacia para la asociación
     generos y libros. Retorna el catalogo inicializado.
     """
-    catalog = {'show_id': None,
-               'type': None,
-               'title': None,
-               'director': None,
-               'cast': None,
-               'country': None,
-               'date_added': None,
-               'release_year': None,
-               'rating': None,
-               'duration': None,
-               'listed_in': None,
-               'description': None}
-
-    catalog['show_id'] = lt.newList('ARRAY_LIST')
-
-    catalog['type'] = lt.newList('SINGLE_LINKED')
-                               
-    catalog['title'] = lt.newList('SINGLE_LINKED')
-                                
-    catalog['director'] = lt.newList('ARRAY_LIST')
-
-    catalog['cast'] = lt.newList('ARRAY_LIST')
-
-    catalog['country'] = lt.newList('ARRAY_LIST')
-
-    catalog['date_added'] = lt.newList('ARRAY_LIST')
-
-    catalog['release_year'] = lt.newList('ARRAY_LIST')
-
-    catalog['rating'] = lt.newList('ARRAY_LIST')
-
-    catalog['duration'] = lt.newList('ARRAY_LIST')
-
-    catalog['listed_in'] = lt.newList('ARRAY_LIST')
-
-    catalog['description'] = lt.newList('ARRAY_LIST')
+    catalog = {
+        "Amazon": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
+        "Disney": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
+        "Hulu": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
+        "Netflix": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
+        "TV_Shows": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
+        "Movies": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
+        "All": lt.newList('SINGLE_LINKED', cmpfunction=compare_name)
+                }
 
     return catalog
+
+# Funciones para agregar informacion al catalogo
+
+def addAmazon(catalog, title):
+    type = title['type']
+    lt.addLast(catalog['All'], title)
+    lt.addLast(catalog['Amazon'], title)
+    if type == 'TV Show':
+        lt.addLast(catalog['TV_Shows'], title)
+    else:
+        lt.addLast(catalog['Movies'], title)
+    return catalog
+
+def addDisney(catalog, title):
+    type = title['type']
+    lt.addLast(catalog['All'], title)
+    lt.addLast(catalog['Disney'], title)
+    if type == 'TV Show':
+        lt.addLast(catalog['TV_Shows'], title)
+    else:
+        lt.addLast(catalog['Movies'], title)
+    return catalog
+
+def addHulu(catalog, title):
+    type = title['type']
+    lt.addLast(catalog['All'], title)
+    lt.addLast(catalog['Hulu'], title)
+    if type == 'TV Show':
+        lt.addLast(catalog['TV_Shows'], title)
+    else:
+        lt.addLast(catalog['Movies'], title)
+    return catalog
+
+def addNetflix(catalog, title):
+    type = title['type']
+    lt.addLast(catalog['All'], title)
+    lt.addLast(catalog['Netflix'], title)
+    if type == 'TV Show':
+        lt.addLast(catalog['TV_Shows'], title)
+    else:
+        lt.addLast(catalog['Movies'], title)
+    return catalog
+
+# Funciones para creacion de datos
+
+# Funciones de consulta
+
+def AmazonSize(catalog):
+    
+    return lt.size(catalog['Amazon'])
+
+def DisneySize(catalog):
+    
+    return lt.size(catalog['Disney'])
+
+def HuluSize(catalog):
+    
+    return lt.size(catalog['Hulu'])
+
+def NetflixSize(catalog):
+    
+    return lt.size(catalog['Netflix'])
+
+# Funciones utilizadas para comparar elementos dentro de una lista
+
+# Funciones de ordenamiento
+
+def compare_name(name1, author):
+    if name1.lower() == author['title'].lower():
+        return 0
+    elif name1.lower() > author['title'].lower():
+        return 1
+    return -1
