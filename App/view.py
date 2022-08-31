@@ -91,8 +91,9 @@ while True:
         print('Titulos de Netflix cargados: ' + str(netflix))
 
     elif int(inputs[0]) == 2:
-        
-        respuesta = requerimiento1(catalog, 1920, 1999)
+        fecha1= int(input("Ingrese fecha 1: "))
+        fecha2= int(input("Ingrese fecha 2: "))
+        respuesta = requerimiento1(catalog, fecha1, fecha2)
         x = 1
         for i in lt.iterator(respuesta):
             if x <= 3 or x > lt.size(respuesta)-3:
