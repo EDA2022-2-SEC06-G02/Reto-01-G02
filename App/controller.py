@@ -104,3 +104,14 @@ def loadNetflix(catalog):
         model.addNetflix(catalog, title)
     return model.NetflixSize(catalog)
 
+
+def SortList(lista):
+    return model.SortList(lista)
+
+def requerimiento1(catalog, fecha1, fecha2):
+    
+    return model.requerimiento1(catalog, fecha1, fecha2)
+
+def requerimiento2(catalog, fecha1, fecha2):
+    
+    return model.requerimiento2(catalog, fecha1, fecha2)

@@ -26,6 +26,7 @@
 
 
 from gettext import Catalog
+from turtle import title
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
@@ -101,7 +102,35 @@ def addNetflix(catalog, title):
 
 # Funciones para creacion de datos
 
+def SortList(lista):
+    ordenado = sa.sort(lista, compare_title)
+    return ordenado
+
 # Funciones de consulta
+
+def requerimiento1(catalog, fecha1, fecha2):
+    movies = catalog['Movies']
+    x = lt.newList('SINGLE_LINKED')
+    
+    for movie in lt.iterator(movies):
+        if int(movie['release_year']) >= fecha1 and int(movie['release_year']) <= fecha2:
+            lt.addLast(x, movie)
+    
+    respuesta = sa.sort(x, compare_title)      
+    return respuesta
+
+def requerimiento2(catalog, fecha1, fecha2):
+    movies = catalog['TV_Shows']
+    x = lt.newList('SINGLE_LINKED')
+    
+    for movie in lt.iterator(movies):
+        if int(movie['release_year']) >= fecha1 and int(movie['release_year']) <= fecha2:
+            lt.addLast(x, movie)
+    
+    respuesta = sa.sort(x, compare_title)      
+    return respuesta
+        
+
 
 def AmazonSize(catalog):
     
@@ -123,9 +152,16 @@ def NetflixSize(catalog):
 
 # Funciones de ordenamiento
 
-def compare_name(name1, author):
-    if name1.lower() == author['title'].lower():
+def compare_name(author1, author2):
+    if author1['title'].lower() == author2['title'].lower():
         return 0
-    elif name1.lower() > author['title'].lower():
+    elif author1['title'].lower() > author2['title'].lower():
         return 1
     return -1
+
+def compare_title(title1, title2):
+    if int(title1['release_year']) == int(title2['release_year']):
+        if title1['title'] == title2['title']:
+            return title1['duration'] < title2['duration']
+        return title1['title'] < title2['title']
+    return int(title1['release_year']) < int(title2['release_year'])

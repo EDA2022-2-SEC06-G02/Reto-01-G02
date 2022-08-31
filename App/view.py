@@ -63,8 +63,16 @@ def loadData(control):
     amazon, disney, hulu, netflix = controller.loadData(control)
 
     return amazon, disney, hulu, netflix
+
+def SortList(lista):
+    
+    return controller.SortList(lista)
     
 control = newController()
+
+def requerimiento1(catalog, fecha1, fecha2):
+    
+    return controller.requerimiento1(catalog, fecha1, fecha2)
 
 """
 Menu principal
@@ -76,14 +84,20 @@ while True:
         print("Cargando información de los archivos ....")
         print("Cargando información de los archivos ....")
         amazon, disney, hulu, netflix = loadData(control)
+        catalog = control['model']
         print('Titulos de Amazon cargados: ' + str(amazon))
         print('Titulos de Disney cargados: ' + str(disney))
         print('Titulos de Hulu cargados: ' + str(hulu))
         print('Titulos de Netflix cargados: ' + str(netflix))
 
-
     elif int(inputs[0]) == 2:
-        pass
+        
+        respuesta = requerimiento1(catalog, 1920, 1999)
+        x = 1
+        for i in lt.iterator(respuesta):
+            if x <= 3 or x > lt.size(respuesta)-3:
+                print(i['title'],',', i['release_year'])
+            x += 1
 
     elif int(inputs[0]) == 0:
         sys.exit(0)
