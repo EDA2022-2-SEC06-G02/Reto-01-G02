@@ -57,21 +57,14 @@ def loadData(control, opcion, archivo="-small"):
     Disney = loadDisney(catalog, archivo)
     Hulu = loadHulu(catalog, archivo)
     Netflix = loadNetflix(catalog, archivo)
-    if opcion[2]==1:
+    if opcion==1:
         return Amazon, Disney, Hulu, Netflix
 
-    if opcion[2]==2:
-        while (opcion[0] > Amazon or opcion[1]>Amazon-opcion[0]):
-            if opcion[0] > Amazon:
-                print("La posición sobrepasa el tamaño de los datos, ingrese otra")
-                opcion[0]=int(input("Posición a partir de la que se desea obtener la sublista: "))
-            else:
-                print("El número de elementos a copiar es mayor que el de tamaño de datos, eliga otro")
-                opcion[1]=int(input("Numero de elementos a copiar en la sublista: "))
-        subamazon=lt.subList(catalog["Amazon"], opcion[0], opcion[1])
-        subdisney=lt.subList(catalog["Disney"], opcion[0], opcion[1])
-        subhulu=lt.subList(catalog["Hulu"], opcion[0], opcion[1])
-        subnetflix=lt.subList(catalog["Netflix"], opcion[0], opcion[1])
+    if opcion==2:
+        subamazon=lt.subList(catalog["Amazon"], 1, lt.size(catalog["Amazon"]))
+        subdisney=lt.subList(catalog["Disney"], 1, lt.size(catalog["Disney"]))
+        subhulu=lt.subList(catalog["Hulu"], 1, lt.size(catalog["Hulu"]))
+        subnetflix=lt.subList(catalog["Netflix"], 1, lt.size(catalog["Netflix"]))
         return subamazon, subdisney, subhulu, subnetflix
     
 
@@ -130,10 +123,7 @@ def SortList(lista):
     return model.SortList(lista)
 
 def sublist(opcion):
-    pos=int(input("Posición a partir de la que se desea obtener la sublista: "))
-    numelem=int(input("Numero de elementos a copiar en la sublista: "))
-
-    return [pos, numelem, opcion]
+    return opcion
 
 def representacionDatos(entero):
     return model.RepresentacionDatos(entero)
