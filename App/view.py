@@ -58,17 +58,21 @@ def printMenu():
 catalog = None
 entero = None
 
-def loadData(control):
+def loadData(control, sublist, archivo="-small"):
     """
     Solicita al controlador que cargue los datos en el modelo
     """
-    amazon, disney, hulu, netflix = controller.loadData(control)
+    amazon, disney, hulu, netflix = controller.loadData(control, sublist, archivo)
 
     return amazon, disney, hulu, netflix
 
 def SortList(lista):
     
     return controller.SortList(lista)
+
+def sublist(opcion):
+
+    return controller.sublist(opcion)
 
 def representacionDatos(entero):
     
@@ -90,15 +94,27 @@ while True:
         else:
             ent = entero
         control = newController(ent)
-        print("Cargando información de los archivos ....")
-        print("Cargando información de los archivos ....")
-        amazon, disney, hulu, netflix = loadData(control)
-        catalog = control['model']
-        print('Titulos de Amazon cargados: ' + str(amazon))
-        print('Titulos de Disney cargados: ' + str(disney))
-        print('Titulos de Hulu cargados: ' + str(hulu))
-        print('Titulos de Netflix cargados: ' + str(netflix))
-        print(catalog)
+        archivo=input("Ingrese el sufijo del archivo a cargar: ")
+        opcion=int(input("Escriba '1' para cargar archivo en catálogo o '2' para sublista: "))
+        if opcion==1:
+            print("Cargando información de los archivos ....")
+            print("Cargando información de los archivos ....")
+            amazon, disney, hulu, netflix = loadData(control, [1,1,1], archivo)
+            catalog = control['model']
+            print('Titulos de Amazon cargados: ' + str(amazon))
+            print('Titulos de Disney cargados: ' + str(disney))
+            print('Titulos de Hulu cargados: ' + str(hulu))
+            print('Titulos de Netflix cargados: ' + str(netflix))
+            print(catalog)
+        if opcion==2:
+            amazon, disney, hulu, netflix = loadData(control, sublist(opcion))
+            print("Cargando información de los archivos ....")
+            print("Cargando información de los archivos ....")
+            catalog = control['model']
+            print('Titulos de Amazon cargados: ' + str(amazon))
+            print('Titulos de Disney cargados: ' + str(disney))
+            print('Titulos de Hulu cargados: ' + str(hulu))
+            print('Titulos de Netflix cargados: ' + str(netflix))
 
     elif int(inputs[0]) == 2:
         fecha1= int(input("Ingrese fecha 1: "))

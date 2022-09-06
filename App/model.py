@@ -72,6 +72,7 @@ def addAmazon(catalog, title):
         lt.addLast(catalog['TV_Shows'], title)
     else:
         lt.addLast(catalog['Movies'], title)
+    
     return catalog
 
 def addDisney(catalog, title):
@@ -136,7 +137,7 @@ def requerimiento1(catalog, fecha1, fecha2):
         if int(movie['release_year']) >= fecha1 and int(movie['release_year']) <= fecha2:
             lt.addLast(x, movie)
     
-    respuesta = sortList(x, compare_title)      
+    respuesta = SortList(x, compare_title)      
     return respuesta
 
 def requerimiento2(catalog, fecha1, fecha2):
@@ -185,3 +186,4 @@ def compare_title(title1, title2):
             return title1['duration'] < title2['duration']
         return title1['title'] < title2['title']
     return int(title1['release_year']) < int(title2['release_year'])
+

@@ -23,6 +23,7 @@
 import config as cf
 import model
 import csv
+from DISClib.ADT import list as lt
 
 
 """
@@ -46,59 +47,72 @@ def newController(entero):
     control['model'] = model.newCatalog(entero)
     return control
 
-def loadData(control):
+def loadData(control, opcion, archivo="-small"):
     """
     Carga los datos de los archivos y cargar los datos en la
     estructura de datos
     """
     catalog = control['model']
-    
-    Amazon = loadAmazon(catalog)
-    Disney = loadDisney(catalog)
-    Hulu = loadHulu(catalog)
-    Netflix = loadNetflix(catalog)
+    Amazon = loadAmazon(catalog, archivo)
+    Disney = loadDisney(catalog, archivo)
+    Hulu = loadHulu(catalog, archivo)
+    Netflix = loadNetflix(catalog, archivo)
+    if opcion[2]==1:
+        return Amazon, Disney, Hulu, Netflix
 
-    return Amazon, Disney, Hulu, Netflix
+    if opcion[2]==2:
+        while (opcion[0] > Amazon or opcion[1]>Amazon-opcion[0]):
+            if opcion[0] > Amazon:
+                print("La posición sobrepasa el tamaño de los datos, ingrese otra")
+                opcion[0]=int(input("Posición a partir de la que se desea obtener la sublista: "))
+            else:
+                print("El número de elementos a copiar es mayor que el de tamaño de datos, eliga otro")
+                opcion[1]=int(input("Numero de elementos a copiar en la sublista: "))
+        subamazon=lt.subList(catalog["Amazon"], opcion[0], opcion[1])
+        subdisney=lt.subList(catalog["Disney"], opcion[0], opcion[1])
+        subhulu=lt.subList(catalog["Hulu"], opcion[0], opcion[1])
+        subnetflix=lt.subList(catalog["Netflix"], opcion[0], opcion[1])
+        return subamazon, subdisney, subhulu, subnetflix
     
 
-def loadAmazon(catalog):
+def loadAmazon(catalog, archivo):
     """
     
     """
-    titlesfile = cf.data_dir + 'Data/Streaming/amazon_prime_titles-utf8-small.csv'
+    titlesfile = cf.data_dir + 'Streaming/amazon_prime_titles-utf8'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addAmazon(catalog, title)
     return model.AmazonSize(catalog)
 
 
-def loadDisney(catalog):
+def loadDisney(catalog, archivo):
     """
     Carga todos los tags del archivo y los agrega a la lista de tags
     """
-    titlesfile = cf.data_dir + 'Data/Streaming/disney_plus_titles-utf8-small.csv'
+    titlesfile = cf.data_dir + 'Streaming/disney_plus_titles-utf8'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addDisney(catalog, title)
     return model.DisneySize(catalog)
 
 
-def loadHulu(catalog):
+def loadHulu(catalog, archivo):
     """
     Carga la información que asocia tags con libros.
     """
-    titlesfile = cf.data_dir + 'Data/Streaming/hulu_titles-utf8-small.csv'
+    titlesfile = cf.data_dir + 'Streaming/hulu_titles-utf8'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addHulu(catalog, title)
     return model.HuluSize(catalog)
 
 
-def loadNetflix(catalog):
+def loadNetflix(catalog, archivo):
     """
     Carga la información que asocia tags con libros.
     """
-    titlesfile = cf.data_dir + 'Data/Streaming/netflix_titles-utf8-small.csv'
+    titlesfile = cf.data_dir + 'Streaming/netflix_titles-utf8'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addNetflix(catalog, title)
@@ -114,6 +128,12 @@ def SortList(lista):
     if view.method == "shellsort":
         method2 = "shellsort"
     return model.SortList(lista)
+
+def sublist(opcion):
+    pos=int(input("Posición a partir de la que se desea obtener la sublista: "))
+    numelem=int(input("Numero de elementos a copiar en la sublista: "))
+
+    return [pos, numelem, opcion]
 
 def representacionDatos(entero):
     return model.RepresentacionDatos(entero)
