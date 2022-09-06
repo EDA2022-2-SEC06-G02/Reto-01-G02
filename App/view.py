@@ -34,11 +34,11 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
-def newController():
+def newController(entero):
     """
     Se crea una instancia del controlador
     """
-    control = controller.newController()
+    control = controller.newController(entero)
     return control
 
 def printMenu():
@@ -52,9 +52,11 @@ def printMenu():
     print("7- : Encontrar contenido con un director involucrado")
     print("8- Listar el TOP de los géneros con más contenido")
     print("9- : Listar el TOP de los actores con más participaciones en contenido")
+    print("10- Seleccionar estructura de la lista")
     print("0- : Salir")
 
 catalog = None
+entero = None
 
 def loadData(control):
     """
@@ -67,8 +69,10 @@ def loadData(control):
 def SortList(lista):
     
     return controller.SortList(lista)
+
+def representacionDatos(entero):
     
-control = newController()
+    return controller.representacionDatos(entero)
 
 def requerimiento1(catalog, fecha1, fecha2):
     
@@ -81,6 +85,11 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        if entero == None:
+            ent = 1
+        else:
+            ent = entero
+        control = newController(ent)
         print("Cargando información de los archivos ....")
         print("Cargando información de los archivos ....")
         amazon, disney, hulu, netflix = loadData(control)
@@ -89,6 +98,7 @@ while True:
         print('Titulos de Disney cargados: ' + str(disney))
         print('Titulos de Hulu cargados: ' + str(hulu))
         print('Titulos de Netflix cargados: ' + str(netflix))
+        print(catalog)
 
     elif int(inputs[0]) == 2:
         fecha1= int(input("Ingrese fecha 1: "))
@@ -99,6 +109,11 @@ while True:
             if x <= 3 or x > lt.size(respuesta)-3:
                 print(i['title'],',', i['release_year'])
             x += 1
+            
+    elif int(inputs[0]) == 9:
+        print('1. single linked list')
+        print('2. Array list')
+        entero = int(input('ingrese la estructura que desee usar '))
 
     elif int(inputs[0]) == 0:
         sys.exit(0)

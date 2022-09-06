@@ -27,6 +27,7 @@
 
 from gettext import Catalog
 from turtle import title
+from App.controller import representacionDatos
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
@@ -39,21 +40,22 @@ los mismos.
 
 # Construccion de modelos
 
-def newCatalog():
+def newCatalog(entero):
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar
     todos los libros, adicionalmente, crea una lista vacia para los autores,
     una lista vacia para los generos y una lista vacia para la asociación
     generos y libros. Retorna el catalogo inicializado.
     """
+    estructura = representacionDatos(entero)
     catalog = {
-        "Amazon": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
-        "Disney": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
-        "Hulu": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
-        "Netflix": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
-        "TV_Shows": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
-        "Movies": lt.newList('SINGLE_LINKED', cmpfunction=compare_name),
-        "All": lt.newList('SINGLE_LINKED', cmpfunction=compare_name)
+        "Amazon": lt.newList(estructura, cmpfunction=compare_name),
+        "Disney": lt.newList(estructura, cmpfunction=compare_name),
+        "Hulu": lt.newList(estructura, cmpfunction=compare_name),
+        "Netflix": lt.newList(estructura, cmpfunction=compare_name),
+        "TV_Shows": lt.newList(estructura, cmpfunction=compare_name),
+        "Movies": lt.newList(estructura, cmpfunction=compare_name),
+        "All": lt.newList(estructura, cmpfunction=compare_name)
                 }
 
     return catalog
@@ -105,6 +107,14 @@ def addNetflix(catalog, title):
 def SortList(lista):
     ordenado = sa.sort(lista, compare_title)
     return ordenado
+
+def RepresentacionDatos(entero):
+    if entero == 1:
+        return 'SINGLE_LINKED'
+    elif entero == 2:
+        return 'ARRAY_LIST'
+    else: 
+        return None
 
 # Funciones de consulta
 
