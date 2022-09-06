@@ -30,6 +30,8 @@ from turtle import title
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as ns
+from DISClib.Algorithms.Sorting import selectionsort as ss
 assert cf
 
 """
@@ -102,8 +104,16 @@ def addNetflix(catalog, title):
 
 # Funciones para creacion de datos
 
-def SortList(lista):
-    ordenado = sa.sort(lista, compare_title)
+def SortList(lista, sort):
+    if sort == "shellsort":
+        ordenado = sa.sort(lista, compare_title)
+    
+    if sort == "selection":
+        ordenado = ss.sort(lista, compare_title)
+    
+    if sort == "insertion":
+        ordenado = ns.sort(lista, compare_title)
+    
     return ordenado
 
 # Funciones de consulta
@@ -116,7 +126,7 @@ def requerimiento1(catalog, fecha1, fecha2):
         if int(movie['release_year']) >= fecha1 and int(movie['release_year']) <= fecha2:
             lt.addLast(x, movie)
     
-    respuesta = sa.sort(x, compare_title)      
+    respuesta = sortList(x, compare_title)      
     return respuesta
 
 def requerimiento2(catalog, fecha1, fecha2):

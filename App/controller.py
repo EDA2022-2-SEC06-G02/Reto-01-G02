@@ -106,6 +106,13 @@ def loadNetflix(catalog):
 
 
 def SortList(lista):
+    method2 = None
+    if view.method == "selection":
+        method2 = "selection"
+    if view.method == "insertion":
+        method2 = "insertion"
+    if view.method == "shellsort":
+        method2 = "shellsort"
     return model.SortList(lista)
 
 def requerimiento1(catalog, fecha1, fecha2):
