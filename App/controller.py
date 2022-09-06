@@ -112,25 +112,15 @@ def loadNetflix(catalog, archivo):
     return model.NetflixSize(catalog)
 
 
-def SortList(lista):
-    method2 = None
-    if view.method == "selection":
-        method2 = "selection"
-    if view.method == "insertion":
-        method2 = "insertion"
-    if view.method == "shellsort":
-        method2 = "shellsort"
-    return model.SortList(lista)
-
 def sublist(opcion):
     return opcion
 
 def representacionDatos(entero):
     return model.RepresentacionDatos(entero)
 
-def requerimiento1(catalog, fecha1, fecha2):
+def requerimiento1(catalog, fecha1, fecha2, sort):
     
-    return model.requerimiento1(catalog, fecha1, fecha2)
+    return model.requerimiento1(catalog, fecha1, fecha2, sort)
 
 def requerimiento2(catalog, fecha1, fecha2):
     

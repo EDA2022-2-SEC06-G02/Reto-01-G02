@@ -57,6 +57,7 @@ def printMenu():
 
 catalog = None
 entero = None
+ordenamiento = None
 
 def loadData(control, sublist, archivo="-small"):
     """
@@ -78,9 +79,9 @@ def representacionDatos(entero):
     
     return controller.representacionDatos(entero)
 
-def requerimiento1(catalog, fecha1, fecha2):
+def requerimiento1(catalog, fecha1, fecha2, sort):
     
-    return controller.requerimiento1(catalog, fecha1, fecha2)
+    return controller.requerimiento1(catalog, fecha1, fecha2, sort)
 
 """
 Menu principal
@@ -105,7 +106,6 @@ while True:
             print('Titulos de Disney cargados: ' + str(disney))
             print('Titulos de Hulu cargados: ' + str(hulu))
             print('Titulos de Netflix cargados: ' + str(netflix))
-            print(catalog)
         if opcion==2:
             amazon, disney, hulu, netflix = loadData(control, sublist(opcion))
             print("Cargando información de los archivos ....")
@@ -119,17 +119,22 @@ while True:
     elif int(inputs[0]) == 2:
         fecha1= int(input("Ingrese fecha 1: "))
         fecha2= int(input("Ingrese fecha 2: "))
-        respuesta = requerimiento1(catalog, fecha1, fecha2)
+        respuesta = requerimiento1(catalog, fecha1, fecha2, ordenamiento)
         x = 1
-        for i in lt.iterator(respuesta):
-            if x <= 3 or x > lt.size(respuesta)-3:
+        for i in lt.iterator(respuesta[0]):
+            if x <= 3 or x > lt.size(respuesta[0])-3:
                 print(i['title'],',', i['release_year'])
             x += 1
+        print(str(respuesta[1])+' milisegundos.')
             
     elif int(inputs[0]) == 9:
         print('1. single linked list')
         print('2. Array list')
         entero = int(input('ingrese la estructura que desee usar '))
+        print('1. shell')
+        print('2. insertion')
+        print('3. selection')
+        ordenamiento = (input('ingrese la estructura que desee usar ')).lower
 
     elif int(inputs[0]) == 0:
         sys.exit(0)
