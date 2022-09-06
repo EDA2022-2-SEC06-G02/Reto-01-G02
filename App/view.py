@@ -100,7 +100,7 @@ while True:
         if opcion==1:
             print("Cargando información de los archivos ....")
             print("Cargando información de los archivos ....")
-            amazon, disney, hulu, netflix = loadData(control, [1,1,1], archivo)
+            amazon, disney, hulu, netflix = loadData(control, 1, archivo)
             catalog = control['model']
             print('Titulos de Amazon cargados: ' + str(amazon))
             print('Titulos de Disney cargados: ' + str(disney))
