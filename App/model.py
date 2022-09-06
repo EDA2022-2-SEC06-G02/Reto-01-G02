@@ -27,6 +27,7 @@
 
 from gettext import Catalog
 from turtle import title
+import time
 from App.controller import representacionDatos
 import config as cf
 from DISClib.ADT import list as lt
@@ -107,17 +108,17 @@ def addNetflix(catalog, title):
 
 # Funciones para creacion de datos
 
-def SortList(lista, sort):
-    if sort == "shellsort":
-        ordenado = sa.sort(lista, compare_title)
-    
-    if sort == "selection":
-        ordenado = ss.sort(lista, compare_title)
-    
-    if sort == "insertion":
-        ordenado = ns.sort(lista, compare_title)
-    
-    return ordenado
+def SortList(lista, sort, cmpfunction):
+    if sort != 'selection' or sort!= 'insertion' or sort != 'shell':
+        return sa.sort(lista, cmpfunction)
+    else:
+        if sort  == 'selection':
+            return ss.sort(lista, cmpfunction)
+        elif sort  == 'insertion':
+            return ns.sort(lista, cmpfunction)
+        elif sort  == 'shell':
+            return sa.sort(lista, cmpfunction)
+        
 
 def RepresentacionDatos(entero):
     if entero == 1:
@@ -129,16 +130,17 @@ def RepresentacionDatos(entero):
 
 # Funciones de consulta
 
-def requerimiento1(catalog, fecha1, fecha2):
+def requerimiento1(catalog, fecha1, fecha2, sort):
     movies = catalog['Movies']
     x = lt.newList('SINGLE_LINKED')
-    
+    start_time = getTime()
     for movie in lt.iterator(movies):
         if int(movie['release_year']) >= fecha1 and int(movie['release_year']) <= fecha2:
             lt.addLast(x, movie)
-    
-    respuesta = SortList(x, compare_title)      
-    return respuesta
+    respuesta = SortList(x, sort, compare_title)
+    end_time = getTime()
+    delta_time = deltaTime(start_time, end_time)     
+    return respuesta, delta_time
 
 def requerimiento2(catalog, fecha1, fecha2):
     movies = catalog['TV_Shows']
@@ -187,3 +189,16 @@ def compare_title(title1, title2):
         return title1['title'] < title2['title']
     return int(title1['release_year']) < int(title2['release_year'])
 
+def getTime():
+    """
+    devuelve el instante tiempo de procesamiento en milisegundos
+    """
+    return float(time.perf_counter()*1000)
+
+
+def deltaTime(start, end):
+    """
+    devuelve la diferencia entre tiempos de procesamiento muestreados
+    """
+    elapsed = float(end - start)
+    return elapsed
