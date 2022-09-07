@@ -111,31 +111,28 @@ def addNetflix(catalog, title):
 # Funciones para creacion de datos
 
 def SortList(lista, sort, cmpfunction):
-    if sort != 'selection' or sort!= 'insertion' or sort != 'shell' or sort != "merge" or sort != "quick":
+    if sort != 1 or sort!= 2 or sort != 3 or sort != 4 or sort != 5:
         return sa.sort(lista, cmpfunction)
     
     else:
-        if sort  == 'selection':
+        if sort  == 1:
             return ss.sort(lista, cmpfunction)
         
-        elif sort  == 'insertion':
+        elif sort  == 2:
             return ns.sort(lista, cmpfunction)
         
-        elif sort  == 'shell':
+        elif sort  == 3:
             return sa.sort(lista, cmpfunction)
         
-        elif sort == "merge":
+        elif sort == 4:
             return ms.sort(lista, cmpfunction)
         
-        elif sort == "quick":
-            return qs.sort()
+        elif sort == 5:
+            return qs.sort(lista, cmpfunction)
 
-def sublist(opcion, tamaño, catalog):
-        subamazon=lt.subList(catalog["Amazon"], 1, tamaño)
-        subdisney=lt.subList(catalog["Disney"], 1, tamaño)
-        subhulu=lt.subList(catalog["Hulu"], 1, tamaño)
-        subnetflix=lt.subList(catalog["Netflix"], 1, tamaño)
-        return subamazon, subdisney, subhulu, subnetflix
+def sublist(tamaño, catalog):
+        suball= lt.subList(catalog['All'], 1, tamaño)
+        return suball
         
 
 def RepresentacionDatos(entero):

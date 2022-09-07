@@ -35,7 +35,7 @@ se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 default_limit = 1000
-sys.setrecursionlimit(default_limit*100
+sys.setrecursionlimit(default_limit*100)
 
 def newController(entero):
     """
@@ -62,11 +62,11 @@ catalog = None
 entero = None
 ordenamiento = None
 
-def loadData(control, sublist, tamaño, archivo="-small"):
+def loadData(control, archivo):
     """
     Solicita al controlador que cargue los datos en el modelo
     """
-    amazon, disney, hulu, netflix = controller.loadData(control, 1, tamaño, archivo)
+    amazon, disney, hulu, netflix = controller.loadData(control, archivo)
 
     return amazon, disney, hulu, netflix
 
@@ -74,8 +74,8 @@ def SortList(lista):
     
     return controller.SortList(lista)
 
-def sublist(opcion, tamaño):
-    return controller.sublist(opcion, tamaño)
+def sublist(tamaño, catalog):
+    return controller.sublist(tamaño, catalog)
 
 def representacionDatos(entero):
     
@@ -92,6 +92,9 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        print('1. single linked list')
+        print('2. Array list')
+        entero = int(input('ingrese la estructura que desee usar: '))
         if entero == None:
             ent = 1
         else:
@@ -102,23 +105,23 @@ while True:
         if opcion==1:
             print("Cargando información de los archivos ....")
             print("Cargando información de los archivos ....")
-            amazon, disney, hulu, netflix = loadData(control, 1, 0, archivo)
+            amazon, disney, hulu, netflix = loadData(control, archivo)
             catalog = control['model']
             print('Titulos de Amazon cargados: ' + str(amazon))
             print('Titulos de Disney cargados: ' + str(disney))
             print('Titulos de Hulu cargados: ' + str(hulu))
             print('Titulos de Netflix cargados: ' + str(netflix))
+            total = amazon+disney+hulu+netflix
+            print('Total de titulos cargados: '+ str(total))
         if opcion==2:
             tamaño=int(input("Escriba el tamaño de la sublista: "))
-            amazon, disney, hulu, netflix = loadData(control, sublist(opcion, tamaño), tamaño, archivo)
-            print("Cargando información de los archivos ....")
-            print("Cargando información de los archivos ....")
-            catalog = control['model']
-            print('Titulos de Amazon cargados: ' + str(amazon))
-            print('Titulos de Disney cargados: ' + str(disney))
-            print('Titulos de Hulu cargados: ' + str(hulu))
-            print('Titulos de Netflix cargados: ' + str(netflix))
-
+            if tamaño > total:
+                print('Esa mondá no sirve. Deme un tamaño más pequeño.')
+            else:
+                suball = sublist(tamaño, catalog)
+                for i in lt.iterator(suball):
+                    print(i['title'])
+            
     elif int(inputs[0]) == 2:
         fecha1= int(input("Ingrese fecha 1: "))
         fecha2= int(input("Ingrese fecha 2: "))
@@ -131,15 +134,12 @@ while True:
         print(str(respuesta[1])+' milisegundos.')
             
     elif int(inputs[0]) == 9:
-        print('1. single linked list')
-        print('2. Array list')
-        entero = int(input('ingrese la estructura que desee usar '))
         print('1. shell')
         print('2. insertion')
         print('3. selection')
         print("4. merge")
         print("5. quick")
-        ordenamiento = (input('ingrese la estructura que desee usar ')).lower
+        ordenamiento = int(input('ingrese el ordenaiento que desee usar: '))
 
     elif int(inputs[0]) == 0:
         sys.exit(0)
