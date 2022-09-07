@@ -35,7 +35,7 @@ se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 default_limit = 1000
-sys.setrecursionlimit(default_limit*100
+sys.setrecursionlimit(default_limit*100)
 
 def newController(entero):
     """
@@ -62,11 +62,11 @@ catalog = None
 entero = None
 ordenamiento = None
 
-def loadData(control, sublist, tamaño, archivo="-small"):
+def loadData(control, archivo):
     """
     Solicita al controlador que cargue los datos en el modelo
     """
-    amazon, disney, hulu, netflix = controller.loadData(control, 1, tamaño, archivo)
+    amazon, disney, hulu, netflix = controller.loadData(control, archivo)
 
     return amazon, disney, hulu, netflix
 
@@ -74,8 +74,8 @@ def SortList(lista):
     
     return controller.SortList(lista)
 
-def sublist(opcion, tamaño):
-    return controller.sublist(opcion, tamaño)
+def sublist(tamaño, catalog):
+    return controller.sublist(tamaño, catalog)
 
 def representacionDatos(entero):
     
@@ -102,7 +102,7 @@ while True:
         if opcion==1:
             print("Cargando información de los archivos ....")
             print("Cargando información de los archivos ....")
-            amazon, disney, hulu, netflix = loadData(control, 1, 0, archivo)
+            amazon, disney, hulu, netflix = loadData(control, archivo)
             catalog = control['model']
             print('Titulos de Amazon cargados: ' + str(amazon))
             print('Titulos de Disney cargados: ' + str(disney))
@@ -110,7 +110,7 @@ while True:
             print('Titulos de Netflix cargados: ' + str(netflix))
         if opcion==2:
             tamaño=int(input("Escriba el tamaño de la sublista: "))
-            amazon, disney, hulu, netflix = loadData(control, sublist(opcion, tamaño), tamaño, archivo)
+            amazon, disney, hulu, netflix = loadData(control, archivo)
             print("Cargando información de los archivos ....")
             print("Cargando información de los archivos ....")
             catalog = control['model']

@@ -130,12 +130,9 @@ def SortList(lista, sort, cmpfunction):
         elif sort == "quick":
             return qs.sort()
 
-def sublist(opcion, tamaño, catalog):
-        subamazon=lt.subList(catalog["Amazon"], 1, tamaño)
-        subdisney=lt.subList(catalog["Disney"], 1, tamaño)
-        subhulu=lt.subList(catalog["Hulu"], 1, tamaño)
-        subnetflix=lt.subList(catalog["Netflix"], 1, tamaño)
-        return subamazon, subdisney, subhulu, subnetflix
+def sublist(tamaño, catalog):
+        suball=lt.subList(catalog["All"], 1, tamaño)
+        return suball
         
 
 def RepresentacionDatos(entero):

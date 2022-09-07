@@ -23,7 +23,6 @@
 import config as cf
 import model
 import csv
-from DISClib.ADT import list as lt
 
 
 """
@@ -57,11 +56,7 @@ def loadData(control, opcion, tamaño=0, archivo="-small"):
     Disney = loadDisney(catalog, archivo)
     Hulu = loadHulu(catalog, archivo)
     Netflix = loadNetflix(catalog, archivo)
-    if opcion==1:
-        return Amazon, Disney, Hulu, Netflix
-
-    if opcion==2:
-        return sublist(opcion, tamaño, catalog)
+    return Amazon, Disney, Hulu, Netflix
     
 
 def loadAmazon(catalog, archivo):
@@ -108,8 +103,8 @@ def loadNetflix(catalog, archivo):
     return model.NetflixSize(catalog)
 
 
-def sublist(opcion, tamaño, catalog):
-    return model.sublist(opcion, tamaño, catalog)
+def sublist(tamaño, catalog):
+    return model.sublist(tamaño, catalog)
 
 def representacionDatos(entero):
     return model.RepresentacionDatos(entero)
