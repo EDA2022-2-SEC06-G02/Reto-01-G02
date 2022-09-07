@@ -47,7 +47,7 @@ def newController(entero):
     control['model'] = model.newCatalog(entero)
     return control
 
-def loadData(control, opcion, archivo="-small"):
+def loadData(control, opcion, tamaño=0, archivo="-small"):
     """
     Carga los datos de los archivos y cargar los datos en la
     estructura de datos
@@ -61,11 +61,7 @@ def loadData(control, opcion, archivo="-small"):
         return Amazon, Disney, Hulu, Netflix
 
     if opcion==2:
-        subamazon=lt.subList(catalog["Amazon"], 1, lt.size(catalog["Amazon"]))
-        subdisney=lt.subList(catalog["Disney"], 1, lt.size(catalog["Disney"]))
-        subhulu=lt.subList(catalog["Hulu"], 1, lt.size(catalog["Hulu"]))
-        subnetflix=lt.subList(catalog["Netflix"], 1, lt.size(catalog["Netflix"]))
-        return subamazon, subdisney, subhulu, subnetflix
+        return sublist(opcion, tamaño, catalog)
     
 
 def loadAmazon(catalog, archivo):
@@ -112,8 +108,8 @@ def loadNetflix(catalog, archivo):
     return model.NetflixSize(catalog)
 
 
-def sublist(opcion):
-    return opcion
+def sublist(opcion, tamaño, catalog):
+    return model.sublist(opcion, tamaño, catalog)
 
 def representacionDatos(entero):
     return model.RepresentacionDatos(entero)

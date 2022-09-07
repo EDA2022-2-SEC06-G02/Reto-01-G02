@@ -118,6 +118,13 @@ def SortList(lista, sort, cmpfunction):
             return ns.sort(lista, cmpfunction)
         elif sort  == 'shell':
             return sa.sort(lista, cmpfunction)
+
+def sublist(opcion, tamaño, catalog):
+        subamazon=lt.subList(catalog["Amazon"], 1, tamaño)
+        subdisney=lt.subList(catalog["Disney"], 1, tamaño)
+        subhulu=lt.subList(catalog["Hulu"], 1, tamaño)
+        subnetflix=lt.subList(catalog["Netflix"], 1, tamaño)
+        return subamazon, subdisney, subhulu, subnetflix
         
 
 def RepresentacionDatos(entero):
