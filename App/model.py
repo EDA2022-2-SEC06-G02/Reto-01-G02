@@ -34,6 +34,8 @@ from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.Algorithms.Sorting import insertionsort as ns
 from DISClib.Algorithms.Sorting import selectionsort as ss
+from DISClib.Algorithms.Sorting import quicksort as qs
+from DISClib.Algorithms.Sorting import mergesort as ms
 assert cf
 
 """
@@ -109,15 +111,24 @@ def addNetflix(catalog, title):
 # Funciones para creacion de datos
 
 def SortList(lista, sort, cmpfunction):
-    if sort != 'selection' or sort!= 'insertion' or sort != 'shell':
+    if sort != 'selection' or sort!= 'insertion' or sort != 'shell' or sort != "merge" or sort != "quick":
         return sa.sort(lista, cmpfunction)
+    
     else:
         if sort  == 'selection':
             return ss.sort(lista, cmpfunction)
+        
         elif sort  == 'insertion':
             return ns.sort(lista, cmpfunction)
+        
         elif sort  == 'shell':
             return sa.sort(lista, cmpfunction)
+        
+        elif sort == "merge":
+            return ms.sort(lista, cmpfunction)
+        
+        elif sort == "quick":
+            return qs.sort()
 
 def sublist(opcion, tamaño, catalog):
         subamazon=lt.subList(catalog["Amazon"], 1, tamaño)

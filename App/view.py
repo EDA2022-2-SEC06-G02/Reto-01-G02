@@ -34,6 +34,9 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
+default_limit = 1000
+sys.setrecursionlimit(default_limit*100
+
 def newController(entero):
     """
     Se crea una instancia del controlador
@@ -134,6 +137,8 @@ while True:
         print('1. shell')
         print('2. insertion')
         print('3. selection')
+        print("4. merge")
+        print("5. quick")
         ordenamiento = (input('ingrese la estructura que desee usar ')).lower
 
     elif int(inputs[0]) == 0:
