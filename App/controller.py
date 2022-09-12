@@ -64,7 +64,7 @@ def loadAmazon(catalog, archivo):
     """
     
     """
-    titlesfile = cf.data_dir + 'Streaming/amazon_prime_titles-utf8'+archivo+'.csv'
+    titlesfile = cf.data_dir + 'Streaming/amazon_prime_titles-utf8-'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addAmazon(catalog, title)
@@ -75,7 +75,7 @@ def loadDisney(catalog, archivo):
     """
     Carga todos los tags del archivo y los agrega a la lista de tags
     """
-    titlesfile = cf.data_dir + 'Streaming/disney_plus_titles-utf8'+archivo+'.csv'
+    titlesfile = cf.data_dir + 'Streaming/disney_plus_titles-utf8-'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addDisney(catalog, title)
@@ -86,7 +86,7 @@ def loadHulu(catalog, archivo):
     """
     Carga la información que asocia tags con libros.
     """
-    titlesfile = cf.data_dir + 'Streaming/hulu_titles-utf8'+archivo+'.csv'
+    titlesfile = cf.data_dir + 'Streaming/hulu_titles-utf8-'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addHulu(catalog, title)
@@ -97,7 +97,7 @@ def loadNetflix(catalog, archivo):
     """
     Carga la información que asocia tags con libros.
     """
-    titlesfile = cf.data_dir + 'Streaming/netflix_titles-utf8'+archivo+'.csv'
+    titlesfile = cf.data_dir + 'Streaming/netflix_titles-utf8-'+archivo+'.csv'
     input_file = csv.DictReader(open(titlesfile, encoding='utf-8'))
     for title in input_file:
         model.addNetflix(catalog, title)
