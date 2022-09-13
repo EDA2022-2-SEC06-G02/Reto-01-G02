@@ -28,6 +28,8 @@
 from gettext import Catalog
 from turtle import title
 import time
+from datetime import date
+from datetime import datetime
 from App.controller import representacionDatos
 import config as cf
 from DISClib.ADT import list as lt
@@ -69,6 +71,7 @@ def newCatalog(entero):
 
 def addAmazon(catalog, title):
     type = title['type']
+    title['platform'] = 'Amazon'
     lt.addLast(catalog['All'], title)
     lt.addLast(catalog['Amazon'], title)
     if type == 'TV Show':
@@ -80,6 +83,7 @@ def addAmazon(catalog, title):
 
 def addDisney(catalog, title):
     type = title['type']
+    title['platform'] = 'Disney'
     lt.addLast(catalog['All'], title)
     lt.addLast(catalog['Disney'], title)
     if type == 'TV Show':
@@ -90,6 +94,7 @@ def addDisney(catalog, title):
 
 def addHulu(catalog, title):
     type = title['type']
+    title['platform'] = 'Hulu'
     lt.addLast(catalog['All'], title)
     lt.addLast(catalog['Hulu'], title)
     if type == 'TV Show':
@@ -100,6 +105,7 @@ def addHulu(catalog, title):
 
 def addNetflix(catalog, title):
     type = title['type']
+    title['platform'] = 'Netflix'
     lt.addLast(catalog['All'], title)
     lt.addLast(catalog['Netflix'], title)
     if type == 'TV Show':
@@ -152,23 +158,40 @@ def requerimiento1(catalog, fecha1, fecha2, sort):
     for movie in lt.iterator(movies):
         if int(movie['release_year']) >= fecha1 and int(movie['release_year']) <= fecha2:
             lt.addLast(x, movie)
-    respuesta = SortList(x, sort, compare_title)
+    respuesta = SortList(x, sort, compare_year)
     end_time = getTime()
     delta_time = deltaTime(start_time, end_time)     
     return respuesta, delta_time
 
-def requerimiento2(catalog, fecha1, fecha2):
+def requerimiento2(catalog, fecha1, fecha2, sort):
     movies = catalog['TV_Shows']
     x = lt.newList('SINGLE_LINKED')
+    fecha1 = datetime.strptime(fecha1, '%Y-%m-%d')
+    fecha2 = datetime.strptime(fecha2, '%Y-%m-%d')
+    start_time = getTime()
+    for i in lt.iterator(movies):
+        if i['date_added'] != '':
+            fecha = datetime.strptime(i['date_added'], '%Y-%m-%d')
+            if fecha >= fecha1 and fecha <= fecha2:
+                lt.addLast(x, i)
+    ordenado = SortList(x, sort, compare_date)
+    end_time = getTime()
+    delta_time = deltaTime(start_time, end_time) 
+    return ordenado, delta_time   
     
-    for movie in lt.iterator(movies):
-        if int(movie['release_year']) >= fecha1 and int(movie['release_year']) <= fecha2:
-            lt.addLast(x, movie)
+def requerimiento3(catalog, actor, sort):
+    all = catalog['All']
+    x = lt.newList('SINGLE_LINKED')
+    start_time = getTime()
+    for i in lt.iterator(all):
+        actores = i['cast'].split(', ')
+        if actor in actores:
+            lt.addLast(x, i)
+    ordenado = SortList(x, sort, compare_title)
+    end_time = getTime()
+    delta_time = deltaTime(start_time, end_time) 
+    return ordenado, delta_time
     
-    respuesta = sa.sort(x, compare_title)      
-    return respuesta
-        
-
 
 def AmazonSize(catalog):
     
@@ -197,12 +220,28 @@ def compare_name(author1, author2):
         return 1
     return -1
 
-def compare_title(title1, title2):
+def compare_year(title1, title2):
     if int(title1['release_year']) == int(title2['release_year']):
         if title1['title'] == title2['title']:
             return title1['duration'] < title2['duration']
         return title1['title'] < title2['title']
     return int(title1['release_year']) < int(title2['release_year'])
+
+def compare_title(title1, title2):
+    if int(title1['title']) == int(title2['title']):
+        if title1['release_year'] == title2['release_year']:
+            return title1['duration'] < title2['duration']
+        return title1['release_year'] < title2['release_year']
+    return int(title1['title']) < int(title2['title'])
+
+def compare_date(title1, title2):
+    fecha1 = datetime.strptime(title1['date_added'], '%Y-%m-%d')
+    fecha2 = datetime.strptime(title2['date_added'], '%Y-%m-%d')
+    if fecha1 == fecha2:
+        if title1['title'] == title2['title']:
+            return title1['duration'] < title2['duration']
+        return title1['title'] < title2['title']
+    return fecha1 < fecha2
 
 def getTime():
     """

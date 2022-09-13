@@ -85,6 +85,14 @@ def requerimiento1(catalog, fecha1, fecha2, sort):
     
     return controller.requerimiento1(catalog, fecha1, fecha2, sort)
 
+def requerimiento2(catalog, fecha1, fecha2, sort):
+    
+    return controller.requerimiento2(catalog, fecha1, fecha2, sort)
+
+def requerimiento3(catalog, actor, sort):
+    
+    return controller.requerimiento3(catalog, actor, sort)
+
 """
 Menu principal
 """
@@ -127,12 +135,36 @@ while True:
         fecha2= int(input("Ingrese fecha 2: "))
         respuesta = requerimiento1(catalog, fecha1, fecha2, ordenamiento)
         x = 1
+        print('title - release_year - duration - platform - director - cast')
         for i in lt.iterator(respuesta[0]):
             if x <= 3 or x > lt.size(respuesta[0])-3:
-                print(i['title'],',', i['release_year'])
+                print(i['title'],'-', i['release_year'],'-', i['duration'],'-', i['platform'],'-', i['director'],'-', i['cast'])
             x += 1
         print(str(respuesta[1])+' milisegundos.')
-            
+    
+    elif int(inputs[0]) == 3:
+        fecha1= (input("Ingrese fecha 1: "))
+        fecha2= (input("Ingrese fecha 2: "))
+        respuesta = requerimiento2(catalog, fecha1, fecha2, ordenamiento)
+        x = 1
+        print('title - dete_added - release_year - duration - platform - director - cast')
+        for i in lt.iterator(respuesta[0]):
+            if x <= 3 or x > lt.size(respuesta[0])-3:
+                print(i['title'],'-', i['date_added'],'-', i['release_year'],'-', i['duration'],'-', i['platform'],'-', i['director'],'-', i['cast'])
+            x += 1
+        print(str(respuesta[1])+' milisegundos.')
+        
+    elif int(inputs[0]) == 4:
+        actor = (input("Ingrese el nombre de un actor: "))
+        respuesta = requerimiento3(catalog, actor, ordenamiento)
+        x = 1
+        print('title - type - dete_added - release_year - duration - platform - director - cast')
+        for i in lt.iterator(respuesta[0]):
+            if x <= 3 or x > lt.size(respuesta[0])-3:
+                print(i['title'],'-', i['date_added'],'-', i['type'],'-', i['release_year'],'-', i['duration'],'-', i['platform'],'-', i['director'],'-', i['cast'])
+            x += 1
+        print(str(respuesta[1])+' milisegundos.')
+    
     elif int(inputs[0]) == 9:
         print('1. shell')
         print('2. insertion')
