@@ -48,7 +48,7 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print("2- Listar las películas estrenadas en un periodo de tiempo")
-    print("3- Listar las películas estrenadas en un periodo de tiempo")
+    print("3- Listar los programas de televisión agregados en un periodo de tiempo")
     print("4- Encontrar contenido donde participa un actor")
     print("5- Encontrar contenido por un género especifico")
     print("6- Encontrar contenido producido en un país")
@@ -181,7 +181,7 @@ while True:
             x += 1
         print(str(respuesta[1])+' milisegundos.')
     
-    elif inputs==6:
+    elif inputs==7:
         director=input("Ingrese el director: ")
         respuesta= requerimiento6(catalog, director, ordenamiento)
         x=1
