@@ -93,13 +93,18 @@ def requerimiento3(catalog, actor, sort):
     
     return controller.requerimiento3(catalog, actor, sort)
 
+def requerimiento4(catalog, genero, sort):
+    return controller.requerimiento4(catalog, genero, sort)
+
+def requerimiento6(catalog, top, sort):
+    return controller.requerimiento6(catalog, top, sort)
 """
 Menu principal
 """
 while True:
     printMenu()
-    inputs = input('Seleccione una opción para continuar\n')
-    if int(inputs[0]) == 1:
+    inputs = int(input('Seleccione una opción para continuar\n'))
+    if inputs == 1:
         print('1. single linked list')
         print('2. Array list')
         entero = int(input('ingrese la estructura que desee usar: '))
@@ -130,7 +135,7 @@ while True:
                 for i in lt.iterator(suball):
                     print(i['title'])
             
-    elif int(inputs[0]) == 2:
+    elif inputs== 2:
         fecha1= int(input("Ingrese fecha 1: "))
         fecha2= int(input("Ingrese fecha 2: "))
         respuesta = requerimiento1(catalog, fecha1, fecha2, ordenamiento)
@@ -142,7 +147,7 @@ while True:
             x += 1
         print(str(respuesta[1])+' milisegundos.')
     
-    elif int(inputs[0]) == 3:
+    elif inputs == 3:
         fecha1= (input("Ingrese fecha 1: "))
         fecha2= (input("Ingrese fecha 2: "))
         respuesta = requerimiento2(catalog, fecha1, fecha2, ordenamiento)
@@ -154,7 +159,7 @@ while True:
             x += 1
         print(str(respuesta[1])+' milisegundos.')
         
-    elif int(inputs[0]) == 4:
+    elif inputs== 4:
         actor = (input("Ingrese el nombre de un actor: "))
         respuesta = requerimiento3(catalog, actor, ordenamiento)
         x = 1
@@ -165,7 +170,44 @@ while True:
             x += 1
         print(str(respuesta[1])+' milisegundos.')
     
-    elif int(inputs[0]) == 9:
+    elif inputs== 5:
+        genero= input("Ingrese el nombre del género que quiere buscar: ")
+        respuesta= requerimiento4(catalog, genero, ordenamiento)
+        x = 1
+        print("title - type - dete_added - release_year - duration - platform - director - cast")
+        for i in lt.iterator(respuesta[0]):
+            if x<= 3 or x>lt.size(respuesta[0])-3:
+                print(i['title'],'-', i['date_added'],'-', i['type'],'-', i['release_year'],'-', i['duration'],'-', i['platform'],'-', i['director'],'-', i['cast'])
+            x += 1
+        print(str(respuesta[1])+' milisegundos.')
+    
+    elif inputs==6:
+        director=input("Ingrese el director: ")
+        respuesta= requerimiento6(catalog, director, ordenamiento)
+        x=1
+        print("Types" + "-" + "Count")
+        for i in lt.iterator(respuesta[0]):
+            print("movies", i['type'].count("Movie"), "\ntv_shows", i['type'].count("TV Show"))
+        print("Service_name" + "-" + "Movie")
+        for i in lt.iterator(respuesta[0]):
+            print("Netflix "+"- ", i['platform'].count("Netflix"), "\nAmazon ","- ", i['platform'].count("Amazon"), "\nHulu ","- ", i['platform'].count("Hulu"), "\nDisney ","- ",i['platform'].count("Disney"))
+        print("Listed_in"+"-"+"Count")
+        lista=[]
+        for i in lt.iterator(respuesta[0]):
+            if x<= 3 or x>lt.size(respuesta[0])-3:
+                lista=i['listed_in'].split(",")
+                for l in range(len(lista)):
+                    print(lista[l], i['listed_in'].count(lista[l]))
+            x += 1
+        x=1
+        print("title - release_year - director - stream_service - type - duration - cast - country - rating - listed_in - description")
+        for i in lt.iterator(respuesta[0]):
+            if x<= 3 or x>lt.size(respuesta[0])-3:
+                print(i['title'],'-', i['release_year'],'-', i['director'],'-', i['platform'],'-', i['type'],'-', i['duration'],'-', i['cast'],'-', i['country'],'-', i['rating'],'-', i['listed_in'], '-', i['description'])
+            x += 1
+        print(str(respuesta[1])+' milisegundos.')
+    
+    elif inputs == 10:
         print('1. shell')
         print('2. insertion')
         print('3. selection')
@@ -173,7 +215,7 @@ while True:
         print("5. quick")
         ordenamiento = int(input('ingrese el ordenaiento que desee usar: '))
 
-    elif int(inputs[0]) == 0:
+    elif inputs== 0:
         sys.exit(0)
 
     else:

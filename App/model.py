@@ -191,7 +191,31 @@ def requerimiento3(catalog, actor, sort):
     end_time = getTime()
     delta_time = deltaTime(start_time, end_time) 
     return ordenado, delta_time
-    
+
+def requerimiento4(catalog, genero, sort):
+    all = catalog['All']
+    x = lt.newList('SINGLE_LINKED')
+    start_time = getTime()
+    for i in lt.iterator(all):
+        generos = i['listed_in'].split(', ')
+        if genero in generos:
+            lt.addLast(x, i)
+    ordenado = SortList(x, sort, compare_title)
+    end_time = getTime()
+    delta_time = deltaTime(start_time, end_time)
+    return ordenado, delta_time
+
+def requerimiento6(catalog, director, sort):
+    all = catalog['All']
+    x=lt.newList('SINGLE_LINKED')
+    start_time = getTime()
+    for i in lt.iterator(all):
+        if director==i["director"]:
+            lt.addLast(x, i)
+    respuesta=SortList(x, sort, compare_date)
+    end_time = getTime()
+    delta_time = deltaTime(start_time, end_time)
+    return respuesta, delta_time
 
 def AmazonSize(catalog):
     
@@ -228,11 +252,11 @@ def compare_year(title1, title2):
     return int(title1['release_year']) < int(title2['release_year'])
 
 def compare_title(title1, title2):
-    if int(title1['title']) == int(title2['title']):
+    if title1['title'] == title2['title']:
         if title1['release_year'] == title2['release_year']:
             return title1['duration'] < title2['duration']
         return title1['release_year'] < title2['release_year']
-    return int(title1['title']) < int(title2['title'])
+    return title1['title'] < title2['title']
 
 def compare_date(title1, title2):
     fecha1 = datetime.strptime(title1['date_added'], '%Y-%m-%d')

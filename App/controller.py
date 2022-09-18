@@ -121,3 +121,9 @@ def requerimiento2(catalog, fecha1, fecha2, sort):
 def requerimiento3(catalog, actor, sort):
     
     return model.requerimiento3(catalog, actor, sort)
+
+def requerimiento4(catalog, genero, sort):
+    return model.requerimiento4(catalog, genero, sort)
+
+def requerimiento6(catalog, director, sort):
+    return model.requerimiento6(catalog, director, sort)
