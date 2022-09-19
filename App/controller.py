@@ -105,9 +105,11 @@ def loadNetflix(catalog, archivo):
 
 
 def sublist(tamaño, catalog):
+    
     return model.sublist(tamaño, catalog)
 
 def representacionDatos(entero):
+    
     return model.RepresentacionDatos(entero)
 
 def requerimiento1(catalog, fecha1, fecha2, sort):
@@ -123,7 +125,17 @@ def requerimiento3(catalog, actor, sort):
     return model.requerimiento3(catalog, actor, sort)
 
 def requerimiento4(catalog, genero, sort):
+    
     return model.requerimiento4(catalog, genero, sort)
 
+def requerimiento5(catalog, country, sort):
+
+    return model.requerimiento5(catalog, country, sort)
+
 def requerimiento6(catalog, director, sort):
+    
     return model.requerimiento6(catalog, director, sort)
+
+def requerimiento7(catalog, genre, sort):
+
+    return model.requerimiento7(catalog, genre, sort)

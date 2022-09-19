@@ -56,13 +56,13 @@ def newCatalog(entero):
     """
     estructura = representacionDatos(entero)
     catalog = {
-        "Amazon": lt.newList(estructura, cmpfunction=compare_name),
-        "Disney": lt.newList(estructura, cmpfunction=compare_name),
-        "Hulu": lt.newList(estructura, cmpfunction=compare_name),
-        "Netflix": lt.newList(estructura, cmpfunction=compare_name),
-        "TV_Shows": lt.newList(estructura, cmpfunction=compare_name),
-        "Movies": lt.newList(estructura, cmpfunction=compare_name),
-        "All": lt.newList(estructura, cmpfunction=compare_name)
+        "Amazon": lt.newList(estructura, cmpfunction = compare_name),
+        "Disney": lt.newList(estructura, cmpfunction = compare_name),
+        "Hulu": lt.newList(estructura, cmpfunction = compare_name),
+        "Netflix": lt.newList(estructura, cmpfunction = compare_name),
+        "TV_Shows": lt.newList(estructura, cmpfunction = compare_name),
+        "Movies": lt.newList(estructura, cmpfunction = compare_name),
+        "All": lt.newList(estructura, cmpfunction = compare_name)
                 }
 
     return catalog
@@ -137,7 +137,7 @@ def SortList(lista, sort, cmpfunction):
             return qs.sort(lista, cmpfunction)
 
 def sublist(tamaño, catalog):
-        suball= lt.subList(catalog['All'], 1, tamaño)
+        suball = lt.subList(catalog['All'], 1, tamaño)
         return suball
         
 
@@ -205,16 +205,47 @@ def requerimiento4(catalog, genero, sort):
     delta_time = deltaTime(start_time, end_time)
     return ordenado, delta_time
 
-def requerimiento6(catalog, director, sort):
-    all = catalog['All']
-    x=lt.newList('SINGLE_LINKED')
+def requerimiento5(catalog, country, sort):
+    all = catalog["All"]
+    x = lt.newList("SINGLE_LINKED")
     start_time = getTime()
+    
     for i in lt.iterator(all):
-        if director==i["director"]:
+        countries = i["country"].split(", ")
+        if country in countries:
             lt.addLast(x, i)
-    respuesta=SortList(x, sort, compare_date)
+    
+    ordenado = SortList(x, sort, compare_title)
     end_time = getTime()
     delta_time = deltaTime(start_time, end_time)
+    
+    return ordenado, delta_time
+
+def requerimiento6(catalog, director, sort):
+    all = catalog['All']
+    x = lt.newList('SINGLE_LINKED')
+    start_time = getTime()
+    for i in lt.iterator(all):
+        if director == i["director"]:
+            lt.addLast(x, i)
+    respuesta = SortList(x, sort, compare_date)
+    end_time = getTime()
+    delta_time = deltaTime(start_time, end_time)
+    return respuesta, delta_time
+
+def requerimiento7(catalog, genre, sort):
+    all = catalog["All"]
+    x = lt.newList("SINGLE_LINKED")
+    start_time = getTime()
+    
+    for i in lt.iterator(all):
+        if genre in i["listed_in"]:
+            lt.addLast(x, i)
+    
+    respuesta = SortList(x, sort, compare_date)
+    end_time = getTime()
+    delta_time = deltaTime(start_time, end_time)
+    
     return respuesta, delta_time
 
 def AmazonSize(catalog):

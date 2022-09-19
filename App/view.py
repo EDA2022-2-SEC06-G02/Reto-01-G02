@@ -75,6 +75,7 @@ def SortList(lista):
     return controller.SortList(lista)
 
 def sublist(tamaño, catalog):
+    
     return controller.sublist(tamaño, catalog)
 
 def representacionDatos(entero):
@@ -94,10 +95,21 @@ def requerimiento3(catalog, actor, sort):
     return controller.requerimiento3(catalog, actor, sort)
 
 def requerimiento4(catalog, genero, sort):
+    
     return controller.requerimiento4(catalog, genero, sort)
 
+def requerimiento5(catalog, country, sort):
+
+    return controller.requerimiento5(catalog, country, sort)
+
 def requerimiento6(catalog, top, sort):
+    
     return controller.requerimiento6(catalog, top, sort)
+
+def requerimiento7(catalog, genre, sort):
+
+    return controller.requerimiento7(catalog, genre, sort)
+
 """
 Menu principal
 """
@@ -181,10 +193,22 @@ while True:
             x += 1
         print(str(respuesta[1])+' milisegundos.')
     
-    elif inputs==7:
-        director=input("Ingrese el director: ")
-        respuesta= requerimiento6(catalog, director, ordenamiento)
-        x=1
+    elif inputs == 6:
+        country = input("Ingrese el nombre del país que quiere buscar: ")
+        respuesta = requerimiento5(catalog, country, ordenamiento)
+        x = 1
+        print("")
+        for i in lt.iterator(respuesta[0]):
+            if x <= 3 or x > lt.size(respuesta[0] - 3):
+                print(i["release_year"], "-", i["title"], "-", i["stream_service"], "-", i["duration"], "-", i["type"], "-", i["cast"], "-", i["country"], "-", i["listed_in"], "-", i["description"])
+            x += 1
+        
+        print(str(respuesta[1]) + " milisegundos.")
+
+    elif inputs == 7:
+        director = input("Ingrese el director: ")
+        respuesta = requerimiento6(catalog, director, ordenamiento)
+        x = 1
         print("Types" + "-" + "Count")
         for i in lt.iterator(respuesta[0]):
             print("movies", i['type'].count("Movie"), "\ntv_shows", i['type'].count("TV Show"))
@@ -192,14 +216,14 @@ while True:
         for i in lt.iterator(respuesta[0]):
             print("Netflix "+"- ", i['platform'].count("Netflix"), "\nAmazon ","- ", i['platform'].count("Amazon"), "\nHulu ","- ", i['platform'].count("Hulu"), "\nDisney ","- ",i['platform'].count("Disney"))
         print("Listed_in"+"-"+"Count")
-        lista=[]
+        lista = []
         for i in lt.iterator(respuesta[0]):
-            if x<= 3 or x>lt.size(respuesta[0])-3:
-                lista=i['listed_in'].split(",")
+            if x <= 3 or x > lt.size(respuesta[0])-3:
+                lista = i['listed_in'].split(",")
                 for l in range(len(lista)):
                     print(lista[l], i['listed_in'].count(lista[l]))
             x += 1
-        x=1
+        x = 1
         print("title - release_year - director - stream_service - type - duration - cast - country - rating - listed_in - description")
         for i in lt.iterator(respuesta[0]):
             if x<= 3 or x>lt.size(respuesta[0])-3:
@@ -207,6 +231,14 @@ while True:
             x += 1
         print(str(respuesta[1])+' milisegundos.')
     
+    elif inputs == 8:
+        genre = input("Ingrese el genero: ")
+        respuesta = requerimiento7(catalog, genre, ordenamiento)
+        x = 1
+        print("Listed_in"+"-"+"Count")
+        for i in lt.iterator(respuesta[0]):
+            print("")
+
     elif inputs == 10:
         print('1. shell')
         print('2. insertion')
