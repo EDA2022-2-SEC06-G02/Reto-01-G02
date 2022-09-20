@@ -233,20 +233,23 @@ def requerimiento6(catalog, director, sort):
     delta_time = deltaTime(start_time, end_time)
     return respuesta, delta_time
 
-def requerimiento7(catalog, genre, sort):
+def requerimiento7(catalog, sort):
     all = catalog["All"]
     x = lt.newList("SINGLE_LINKED")
     start_time = getTime()
-    
+
     for i in lt.iterator(all):
-        if genre in i["listed_in"]:
-            lt.addLast(x, i)
+        generos = i["listed_in"].split(", ")
+        for j in generos:
+            counted = generos.count(j)
+            lt.addLast(x, counted)
     
-    respuesta = SortList(x, sort, compare_date)
+    respuesta = SortList(x, sort, compare_number)
     end_time = getTime()
     delta_time = deltaTime(start_time, end_time)
-    
-    return respuesta, delta_time
+
+    return respuesta, delta_time 
+
 
 def AmazonSize(catalog):
     
@@ -267,6 +270,17 @@ def NetflixSize(catalog):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+
+def compare_number(n1, n2):
+    if n1 == n2:
+        return 0
+
+    elif n1 > n2:
+        return 1
+    
+    else:
+        return -1
+
 
 def compare_name(author1, author2):
     if author1['title'].lower() == author2['title'].lower():

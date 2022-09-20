@@ -136,6 +136,6 @@ def requerimiento6(catalog, director, sort):
     
     return model.requerimiento6(catalog, director, sort)
 
-def requerimiento7(catalog, genre, sort):
+def requerimiento7(catalog, sort):
 
-    return model.requerimiento7(catalog, genre, sort)
+    return model.requerimiento7(catalog, sort)

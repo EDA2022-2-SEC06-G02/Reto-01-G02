@@ -106,9 +106,9 @@ def requerimiento6(catalog, top, sort):
     
     return controller.requerimiento6(catalog, top, sort)
 
-def requerimiento7(catalog, genre, sort):
+def requerimiento7(catalog, top, sort):
 
-    return controller.requerimiento7(catalog, genre, sort)
+    return controller.requerimiento7(catalog, sort)
 
 """
 Menu principal
@@ -186,7 +186,7 @@ while True:
         genero= input("Ingrese el nombre del género que quiere buscar: ")
         respuesta= requerimiento4(catalog, genero, ordenamiento)
         x = 1
-        print("title - type - dete_added - release_year - duration - platform - director - cast")
+        print("title - type - date_added - release_year - duration - platform - director - cast")
         for i in lt.iterator(respuesta[0]):
             if x<= 3 or x>lt.size(respuesta[0])-3:
                 print(i['title'],'-', i['date_added'],'-', i['type'],'-', i['release_year'],'-', i['duration'],'-', i['platform'],'-', i['director'],'-', i['cast'])
@@ -233,28 +233,25 @@ while True:
         print(str(respuesta[1])+' milisegundos.')
     
     elif inputs == 8:
-        genre = input("Ingrese el genero: ")
-        respuesta = requerimiento7(catalog, genre, ordenamiento)
+        top = input("Ingrese el numero de generos: ")
+        respuesta = requerimiento7(catalog, top, ordenamiento)
         x = 1
         print("Listed_in" + "-" + "Count")
-        
+
+        lista = []        
         for i in lt.iterator(respuesta[0]):
-            print("")
-        lista = []
-        
-        for i in lt.iterator(respuesta[0]):
-            if x <= 3 or x > lt.size(respuesta[0] - 3):
-                lista = i["listed_in"].split(",")
+            if x <= int(top) or x > lt.size(respuesta[0]) - int(top):
+                lista = i['listed_in'].split(",")
                 for l in range(len(lista)):
-                    print(lista[l], i["listed_in"].count(lista[l]))
+                    print(lista[l], i['listed_in'].count(lista[l]))
             x += 1
         x = 1
 
         print("listed_in - count - type - stream_service")
         
         for i in lt.iterator(respuesta[0]):
-            if x <= 3 or x > lt.size(respuesta[0]) - 3:
-                print(i["listed_in", "-", i["listed_in".count(lista[l], "-", i["type"], i["stream_service"])]])
+            if x <= int(top) or x > lt.size(respuesta[0]) - int(top):
+                print(i["listed_in"], "-", i["listed_in"].count(lista[l]), "-", i["type"], "-", i["platform"])
             x += 1
         print(str(respuesta[1] + " milisegundos."))
 
