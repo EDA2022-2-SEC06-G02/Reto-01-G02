@@ -200,8 +200,8 @@ while True:
         print("release_year - title - stream_service - duration - type - cast - country - listed_in - description")
         
         for i in lt.iterator(respuesta[0]):
-            if x <= 3 or x > lt.size(respuesta[0] - 3):
-                print(i["release_year"], "-", i["title"], "-", i["stream_service"], "-", i["duration"], "-", i["type"], "-", i["cast"], "-", i["country"], "-", i["listed_in"], "-", i["description"])
+            if x <= 3 or x > lt.size(respuesta[0]) - 3:
+                print(i["release_year"], "-", i["title"], "-", i["duration"], "-", i["type"], "-", i["cast"], "-", i["country"], "-", i["listed_in"], "-", i["description"])
             x += 1
         
         print(str(respuesta[1]) + " milisegundos.")
