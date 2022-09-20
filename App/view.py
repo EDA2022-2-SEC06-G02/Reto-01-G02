@@ -197,7 +197,8 @@ while True:
         country = input("Ingrese el nombre del país que quiere buscar: ")
         respuesta = requerimiento5(catalog, country, ordenamiento)
         x = 1
-        print("")
+        print("release_year - title - stream_service - duration - type - cast - country - listed_in - description")
+        
         for i in lt.iterator(respuesta[0]):
             if x <= 3 or x > lt.size(respuesta[0] - 3):
                 print(i["release_year"], "-", i["title"], "-", i["stream_service"], "-", i["duration"], "-", i["type"], "-", i["cast"], "-", i["country"], "-", i["listed_in"], "-", i["description"])
@@ -235,9 +236,27 @@ while True:
         genre = input("Ingrese el genero: ")
         respuesta = requerimiento7(catalog, genre, ordenamiento)
         x = 1
-        print("Listed_in"+"-"+"Count")
+        print("Listed_in" + "-" + "Count")
+        
         for i in lt.iterator(respuesta[0]):
             print("")
+        lista = []
+        
+        for i in lt.iterator(respuesta[0]):
+            if x <= 3 or x > lt.size(respuesta[0] - 3):
+                lista = i["listed_in"].split(",")
+                for l in range(len(lista)):
+                    print(lista[l], i["listed_in"].count(lista[l]))
+            x += 1
+        x = 1
+
+        print("listed_in - count - type - stream_service")
+        
+        for i in lt.iterator(respuesta[0]):
+            if x <= 3 or x > lt.size(respuesta[0]) - 3:
+                print(i["listed_in", "-", i["listed_in".count(lista[l], "-", i["type"], i["stream_service"])]])
+            x += 1
+        print(str(respuesta[1] + " milisegundos."))
 
     elif inputs == 10:
         print('1. shell')

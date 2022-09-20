@@ -211,7 +211,7 @@ def requerimiento5(catalog, country, sort):
     start_time = getTime()
     
     for i in lt.iterator(all):
-        countries = i["country"].split(", ")
+        countries = i["country"]
         if country in countries:
             lt.addLast(x, i)
     
