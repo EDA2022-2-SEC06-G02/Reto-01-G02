@@ -160,8 +160,8 @@ while True:
         print(str(respuesta[1])+' milisegundos.')
     
     elif inputs == 3:
-        fecha1= (input("Ingrese fecha 1: "))
-        fecha2= (input("Ingrese fecha 2: "))
+        fecha1= (input("Ingrese fecha 1 (AAAA-MM-DD): "))
+        fecha2= (input("Ingrese fecha 2 (AAAA-MM-DD): "))
         respuesta = requerimiento2(catalog, fecha1, fecha2, ordenamiento)
         x = 1
         print('title - dete_added - release_year - duration - platform - director - cast')
